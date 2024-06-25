@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->binary('image');
             $table->integer('qty');
-            $table->double('discount');
+            $table->double('discount')->nullable();
             $table->timestamps();
         });
     }
