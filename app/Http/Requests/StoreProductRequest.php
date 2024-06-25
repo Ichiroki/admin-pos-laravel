@@ -35,6 +35,21 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Kolom form ini wajib diisi',
+            'name.string' => 'Kolom ini hanya menerima huruf saja',
+            'name.max' => 'Kolom ini maksimal 150 huruf',
+            'name.min' => 'Kolom ini minimal 2 huruf',
+            'category.required' => 'Kolom form ini wajib diisi',
+            'category.string' => 'Kolom ini hanya menerima huruf saja',
+            'category.max' => 'Kolom ini maksimal 25 huruf',
+            'category.min' => 'Kolom ini minimal 1 huruf',
+            'description.required' => 'Kolom form ini wajib diisi',
+            'description.string' => 'Kolom ini hanya menerima huruf saja',
+            'description.max' => 'Kolom ini maksimal 255 huruf',
+            'description.min' => 'Kolom ini minimal 3 huruf',
+            'image.required' => 'Kolom form ini wajib diisi',
+            'qty.required' => 'Kolom form ini wajib diisi',
+            'qty.integer' => 'Kolom form ini hanya menerima angka saja',
+            'discount.integer' => 'Kolom form ini hanya menerima angka saja'
         ];
     }
 }

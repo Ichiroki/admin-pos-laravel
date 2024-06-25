@@ -57,7 +57,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('pages.product.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -65,7 +67,22 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->except('image'));
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $newImageName = $image->getClientOriginalName();
+            if ($product->image != $newImageName) {
+                $randomCode = Str::random(10);
+                $imageName = "NLE-" . $randomCode . "-" . $newImageName;
+                $image->move(public_path('images'), $imageName);
+                $product->update(['image' => $imageName]);
+                // Hapus gambar lama jika ada
+                // if (file_exists(public_path('images/' . $product->getOriginal('image')))) {
+                //     unlink(public_path('images/' . $product->getOriginal('image')));
+                // }
+            }
+        }
+        return redirect()->route('products.index')->with('success', 'Produk Berhasil Diupdate');
     }
 
     /**
