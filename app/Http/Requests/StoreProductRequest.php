@@ -27,7 +27,7 @@ class StoreProductRequest extends FormRequest
             'description' => 'required|string|max:255|min:3',
             'image' => 'required',
             'qty' => 'required|integer',
-            'discount' => 'required|integer'
+            'discount' => 'nullable|integer'
         ];
     }
 

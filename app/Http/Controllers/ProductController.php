@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.product.index');
+        $products = Product::all();
+        return view('pages.product.index', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -29,7 +33,15 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        return Product::create($request);
+        $product = Product::create($request->except('image'));
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $randomCode = Str::random(10);
+            $imageName = "NLE-" . $randomCode . "-" . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $product->update(['image' => $imageName]);
+        }
+        return redirect()->route('products.index')->with('success', 'Produk Berhasil Ditambahkan');
     }
 
     /**
