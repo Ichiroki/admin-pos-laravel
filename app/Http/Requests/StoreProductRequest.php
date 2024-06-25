@@ -11,7 +11,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,6 +28,13 @@ class StoreProductRequest extends FormRequest
             'image' => 'required',
             'qty' => 'required|integer',
             'discount' => 'required|integer'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Kolom form ini wajib diisi',
         ];
     }
 }

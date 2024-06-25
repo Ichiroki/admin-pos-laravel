@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="mb-6 flex justify-between gap-3 items-center">
                         <p>Product List</p>
-                        <a href="{{ route('products.store') }}" class="block w-fit p-3 py-1 shadow-lg shadow-gray-500/50 bg-black text-white rounded-lg text-[15px] cursor-pointer active:scale-[.97]">Create New Product</a>
+                        <x-button link="{{ route('products.create') }}">Create New Product</x-button>
                     </div>
                     <div class="overflow-auto">
                         <table class="items-center bg-transparent w-full border-collapse">
