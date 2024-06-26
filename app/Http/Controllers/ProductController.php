@@ -74,12 +74,12 @@ class ProductController extends Controller
             if ($product->image != $newImageName) {
                 $randomCode = Str::random(10);
                 $imageName = "NLE-" . $randomCode . "-" . $newImageName;
-                $image->move(public_path('images'), $imageName);
-                $product->update(['image' => $imageName]);
                 // Hapus gambar lama jika ada
-                // if (file_exists(public_path('images/' . $product->getOriginal('image')))) {
-                //     unlink(public_path('images/' . $product->getOriginal('image')));
-                // }
+                if (file_exists(public_path('images/' . $product->getOriginal('image')))) {
+                    unlink(public_path('images/' . $product->getOriginal('image')));
+                    $image->move(public_path('images'), $imageName);
+                    $product->update(['image' => $imageName]);
+                }
             }
         }
         return redirect()->route('products.index')->with('success', 'Produk Berhasil Diupdate');
