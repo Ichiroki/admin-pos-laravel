@@ -69,7 +69,20 @@
                                     </td>
                                     <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex gap-3">
                                         <x-button tag="link" route="{{ route('products.edit', ['product' => $product->id]) }}">Edit</x-button>
-                                        <x-button tag="link">Delete</x-button>
+                                        <div x-data="{ showModal: false }">
+                                            <x-button tag="button" x-on:click="showModal = true">Delete</x-button>
+                                            <x-modal name="delete-modal" show="$entangle('showModal')">
+                                                <p class="mb-6">Are you sure you want to delete this product?</p>
+                                                    <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <div class="flex items-center justify-between flex-row">
+                                                            <x-button tag="button" x-on:click="showModal = false">Cancel</x-button>
+                                                            <x-button tag="button" type="submit">Delete</x-button>
+                                                        </div>
+                                                    </form>
+                                            </x-modal>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -81,3 +94,4 @@
         </div>
     </div>
 </x-app-layout>
+
