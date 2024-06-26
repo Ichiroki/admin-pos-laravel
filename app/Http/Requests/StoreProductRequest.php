@@ -25,6 +25,7 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|max:150|min:2',
             'category' => 'required|string|max:25|min:1',
             'description' => 'required|string|max:255|min:3',
+            'price' => 'required|integer',
             'image' => 'required',
             'qty' => 'required|integer',
             'discount' => 'nullable|integer'
@@ -46,6 +47,8 @@ class StoreProductRequest extends FormRequest
             'description.string' => 'Kolom ini hanya menerima huruf saja',
             'description.max' => 'Kolom ini maksimal 255 huruf',
             'description.min' => 'Kolom ini minimal 3 huruf',
+            'price.required' => 'Kolom form ini wajib diisi',
+            'price.integer' => 'Kolom ini hanya menerima angka saja',
             'image.required' => 'Kolom form ini wajib diisi',
             'qty.required' => 'Kolom form ini wajib diisi',
             'qty.integer' => 'Kolom form ini hanya menerima angka saja',

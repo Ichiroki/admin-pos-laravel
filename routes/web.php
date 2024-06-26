@@ -8,13 +8,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/')->group(function() {
+Route::prefix('/')->middleware(['auth', 'verified'])->group(function() {
     Route::get('dashboard', function() {
         return view('dashboard');
     })->name('dashboard');
 
     Route::resource('products', ProductController::class)->names('products');
-})->middleware(['auth', 'verified']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

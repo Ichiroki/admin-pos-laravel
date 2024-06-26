@@ -44,17 +44,28 @@
                                 @enderror
                             </div>
                         </div>
-                         <div class="flex flex-col md:flex-row gap-3 w-full justify-between">
+                         <div class="flex flex-col md:flex-row gap-3 w-full justify-between mb-6    ">
+                            <div class="md:w-1/2">
+                                <x-input-label for="price">Harga</x-input-label>
+                                <x-text-input type="number" name="price" class="mt-3 w-full"></x-text-input>
+                                @error('price')
+                                    <div class="text-rose-500">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3 w-full justify-between mb-6">
                             <div class="mb-3 md:w-1/2">
                                 <x-input-label for="description">Deskripsi</x-input-label>
-                                <x-textarea name="description" class="w-full"></x-textarea>
+                                <x-textarea name="description" class="w-full h-14"></x-textarea>
                                 @error('description')
                                     <div class="text-rose-500">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="md:w-1/2">
-                                <x-input-label for="image">Gambar</x-input-label>
-                                <x-text-input type="file" name="image" class="mt-3 w-full px-4 h-16"/>
+                            <div>
+                                <x-input-label for="image">
+                                    Gambar
+                                    <x-text-input type="file" name="image" class="mt-3 w-full px-3"/>
+                                </x-input-label>
                                 @error('gambar')
                                     <div class="text-rose-500">{{ $message }}</div>
                                 @enderror

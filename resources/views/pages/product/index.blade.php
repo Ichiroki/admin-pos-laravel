@@ -67,8 +67,9 @@
                                     <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $product->description }}
                                     </td>
-                                    <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex gap-3">
                                         <x-button tag="link" route="{{ route('products.edit', ['product' => $product->id]) }}">Edit</x-button>
+                                        <x-button tag="link">Delete</x-button>
                                     </td>
                                 </tr>
                             @endforeach
