@@ -23,7 +23,11 @@
                             </div>
                             <div class="md:w-1/2">
                                 <x-input-label for="category">Kategori</x-input-label>
-                                <x-text-input type="text" name="category" class="mt-3 w-full" value="{{ $product->category }}"></x-text-input>
+                                <select name="category_id" class="outline-none w-full block mt-3 border-gray-300 focus:ring-indigo-500 rounded-md">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('category')
                                     <div class="text-rose-500">{{ $message }}</div>
                                 @enderror

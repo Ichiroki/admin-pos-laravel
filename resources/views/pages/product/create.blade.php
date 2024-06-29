@@ -23,9 +23,9 @@
                             <div class="md:w-1/2">
                                 <x-input-label for="category_id">Kategori</x-input-label>
                                 <select name="category_id" class="outline-none w-full block mt-3 border-gray-300 focus:ring-indigo-500">
-                                    <option value="1">Makanan</option>
-                                    <option value="2">Minuman</option>
-                                    <option value="3">Desserts</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('category')
                                     <div class="text-rose-500">{{ $message }}</div>
