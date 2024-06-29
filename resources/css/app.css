@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
+
+    @layer components {
+        select[name="categories_id"] option {
+            @apply bg-gray-50 text-gray-800 font-semibold;
+        }
+    }
+
 @tailwind utilities;

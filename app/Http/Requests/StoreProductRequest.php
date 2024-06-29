@@ -23,7 +23,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:150|min:2',
-            'category' => 'required|string|max:25|min:1',
+            'category_id' => 'required|integer',
             'description' => 'required|string|max:255|min:3',
             'price' => 'required|integer',
             'image' => 'required',
@@ -39,10 +39,8 @@ class StoreProductRequest extends FormRequest
             'name.string' => 'Kolom ini hanya menerima huruf saja',
             'name.max' => 'Kolom ini maksimal 150 huruf',
             'name.min' => 'Kolom ini minimal 2 huruf',
-            'category.required' => 'Kolom form ini wajib diisi',
-            'category.string' => 'Kolom ini hanya menerima huruf saja',
-            'category.max' => 'Kolom ini maksimal 25 huruf',
-            'category.min' => 'Kolom ini minimal 1 huruf',
+            'category_id.required' => 'Kolom form ini wajib diisi',
+            'category_id.integer' => 'Kolom ini hanya menerima angka saja',
             'description.required' => 'Kolom form ini wajib diisi',
             'description.string' => 'Kolom ini hanya menerima huruf saja',
             'description.max' => 'Kolom ini maksimal 255 huruf',
