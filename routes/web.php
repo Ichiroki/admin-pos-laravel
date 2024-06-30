@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,6 +14,11 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(function() {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('menu', function() {
+        return view('special.menu');
+    })->name('menu');
+
+    Route::resource('users', UserController::class)->names('users');
     Route::resource('products', ProductController::class)->names('products');
 });
 
