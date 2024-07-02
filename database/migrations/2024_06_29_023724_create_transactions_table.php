@@ -17,11 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('amount');
             $table->double('total_price');
-            $table->string('payment_method');
+            $table->unsignedBigInteger('payment_method_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
         });
     }
 

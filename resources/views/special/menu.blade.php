@@ -29,11 +29,11 @@
                         </button>
                     </div>
                 </div>
-                <div x-data="{ showResponsiveCart: false }">
+                <div x-data="{ showResponsiveCart: false }" class="block md:hidden">
                     <button type="button" class="rounded-full px-6 py-5 bg-white absolute bottom-7 right-7 hover:ring-4 hover:ring-gray-600 transition" id="floating-btn" @click=" showResponsiveCart = ! showResponsiveCart ">
                         <i class="bi bi-cart-check-fill group-hover:text-white transition-all duration-150"></i>
                     </button>
-                    <div x-show="showResponsiveCart" >
+                    <div x-show="showResponsiveCart">
                         <div id="overlay" class="bg-gray-50 absolute top-0 w-full bg-[rgba(0,0,0,.5)] p-5 h-screen z-10">
                         asdfsadf</div>
                         {{-- <div class="bg-white rounded-md h-screen">

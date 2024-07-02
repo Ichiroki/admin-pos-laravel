@@ -12,7 +12,7 @@ class Transaction extends Model
         'product_id',
         'amount',
         'total_price',
-        'payment_method'
+        'payment_method_id'
     ];
 
     public function user() {
@@ -21,6 +21,10 @@ class Transaction extends Model
 
     public function product() {
         return $this->belongsTo(Product::class);
+    }
+
+    public function paymentMethod() {
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     use HasFactory;
