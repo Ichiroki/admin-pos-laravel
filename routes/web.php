@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -20,6 +21,7 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(function() {
 
     Route::resource('users', UserController::class)->names('users');
     Route::resource('products', ProductController::class)->names('products');
+    Route::resource('methods', PaymentMethodController::class)->names('methods');
 });
 
 Route::middleware('auth')->group(function () {

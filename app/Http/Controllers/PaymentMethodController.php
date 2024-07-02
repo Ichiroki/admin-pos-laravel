@@ -12,7 +12,10 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        $method = PaymentMethod::all();
+        return view('pages.paymentMethod.index', [
+            'methods' => $method
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.paymentMethod.create');
     }
 
     /**
@@ -28,7 +31,13 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'method_name' => 'required|string|max:15|min:1'
+        ]);
+
+        PaymentMethod::create($validated);
+
+        return redirect()->route('methods.index')->with('success', 'Metode ini berhasil ditambahkan');
     }
 
     /**
@@ -42,24 +51,35 @@ class PaymentMethodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PaymentMethod $paymentMethod)
+    public function edit($id)
     {
-        //
+        $paymentMethod = PaymentMethod::findOrFail($id);
+        return view('pages.paymentMethod.edit', [
+            'method' => $paymentMethod
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PaymentMethod $paymentMethod)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'method_name' => 'required|string|max:15|min:1,|unique:payment_methods,method_name'
+        ]);
+
+        PaymentMethod::findOrFail($id)->update($validated);
+
+        return redirect()->route('methods.index')->with('success', 'Metode ini berhasil dirubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaymentMethod $paymentMethod)
+    public function destroy($id)
     {
-        //
+        PaymentMethod::destroy($id);
+
+        return redirect()->route('methods.index')->with('success', 'Metode ini berhasil dihapus');
     }
 }
