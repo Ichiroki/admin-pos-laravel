@@ -17,20 +17,21 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <a href="{{ route('dashboard') }}" class="text-gray-400 underline absolute text-sm cursor-default"><< Get back to dashboard</a>
-        <div class="bg-gray-400 flex items-center justify-center h-screen">
+        <div class="bg-gray-400 flex items-center justify-center h-screen overflow-y-hidden">
             <div class="border-gray-500 bg-gray-300 md:min-h-[37rem] w-full md:w-11/12 md:rounded-lg shadow-lg flex flex-col md:flex-row justify-between overflow-hidden relative min-h-screen" x-data="{ cart: [] }">
-                <div class="p-5 w-full md:w-9/12 overflow-auto">
-                    <div class="bg-gray-50 md:rounded-lg p-5">
+                <div class="p-5 w-full md:w-9/12">
+                    <div class="bg-gray-50 md:rounded-lg p-5 h-full overflow-auto">
                         <h1 class="text-2xl font-semibold uppercase mb-3 block w-full border-b-2 border-gray-300 pb-3">Pilih Menu</h1>
-                        <div class="flex flex-col justify-between overflow-y-scroll">
-                            @foreach ($products as $product)
-                                @switch($product->category_id)
-                                    @case(1)
-                                    <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Makanan</h1>
-                                    <div class="flex flex-col items-center border border-gray-300 w-fit rounded-lg p-2">
-                                        <img src="{{asset('images/'. $product->image)}}" class="w-32">
+                        <div class="flex flex-col justify-between h-[500px] overflow-y-auto" id="menu-list">
+                            @if(count($foods) > 0)
+                            <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Makanan</h1>
+                            <div class="flex flex-row gap-3">
+                                @foreach ($foods as $food)
+                                <div class="flex flex-col items-center border border-gray-300 w-1/4 rounded-lg mb-6">
+                                    <img src="{{asset('images/'. $food->image)}}" class="h-52">
+                                    <div class="p-2">
                                         <div class="mt-2">
-                                            <h1>{{ $product->name }}</h1>
+                                            <h1>{{ $food->name }}</h1>
                                         </div>
                                         <div class="mt-2">
                                             <button type="button" class="border-2 border-green-500 px-3 py-1 rounded-md hover:bg-green-500 group transition-all duration-150" id="cart-btn">
@@ -39,14 +40,19 @@
                                             </button>
                                         </div>
                                     </div>
-                                        @break
-
-                                    @case(2)
-                                    <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Minuman</h1>
-                                    <div class="flex flex-col items-center border border-gray-300 w-fit rounded-lg p-2">
-                                        <img src="{{asset('images/'. $product->image)}}" class="w-32">
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+                            @if(count($drinks) > 0)
+                            <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Minuman</h1>
+                            <div class="flex flex-row gap-3">
+                                @foreach ($drinks as $drink)
+                                <div class="flex flex-col items-center border border-gray-300 w-1/4 rounded-lg mb-6">
+                                    <img src="{{asset('images/'. $drink->image)}}" class="h-52">
+                                    <div class="p-2">
                                         <div class="mt-2">
-                                            <h1>{{ $product->name }}</h1>
+                                            <h1>{{ $drink->name }}</h1>
                                         </div>
                                         <div class="mt-2">
                                             <button type="button" class="border-2 border-green-500 px-3 py-1 rounded-md hover:bg-green-500 group transition-all duration-150" id="cart-btn">
@@ -55,27 +61,10 @@
                                             </button>
                                         </div>
                                     </div>
-                                    @break
-
-                                    @case(3)
-                                    <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Desserts</h1>
-                                    <div class="flex flex-col items-center border border-gray-300 w-fit rounded-lg p-2">
-                                        <img src="{{asset('images/'. $product->image)}}" class="w-32">
-                                        <div class="mt-2">
-                                            <h1>{{ $product->name }}</h1>
-                                        </div>
-                                        <div class="mt-2">
-                                            <button type="button" class="border-2 border-green-500 px-3 py-1 rounded-md hover:bg-green-500 group transition-all duration-150" id="cart-btn">
-                                                <i class="bi bi-plus group-hover:text-white transition-all duration-150 text-sm"></i>
-                                                <span class="group-hover:text-white transition-all duration-150 font-semibold text-sm">Tambah</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    @break
-                                    @default
-
-                                @endswitch
-                            @endforeach
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

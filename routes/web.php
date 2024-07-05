@@ -18,9 +18,13 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(function() {
     })->name('dashboard');
 
     Route::get('menu', function() {
-        $products = Product::with('category')->orderBy('category_id')->get();
+        $foods = Product::with('category')->where('category_id', '=', 1)->get();
+        $drinks = Product::with('category')->where('category_id', '=', 2)->get();
+        $desserts = Product::with('category')->where('category_id', '=', 3)->get();
         return view('special.menu', [
-            'products' => $products
+            'foods' => $foods,
+            'drinks' => $drinks,
+            'desserts' => $desserts
         ]);
     })->name('menu');
 
