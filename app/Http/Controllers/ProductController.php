@@ -97,6 +97,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $image = $product->image;
+        if($image) {
+            if(file_exists(public_path('images/' . $image))) {
+                unlink(public_path('images/' . $image));
+            }
+        }
+
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Produk ini berhasil dihapus');

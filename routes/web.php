@@ -3,7 +3,9 @@
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,11 +18,15 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(function() {
     })->name('dashboard');
 
     Route::get('menu', function() {
-        return view('special.menu');
+        $products = Product::with('category')->orderBy('category_id')->get();
+        return view('special.menu', [
+            'products' => $products
+        ]);
     })->name('menu');
 
     Route::resource('users', UserController::class)->names('users');
     Route::resource('products', ProductController::class)->names('products');
+    Route::resource('transactions', TransactionController::class)->names('transactions');
     Route::resource('methods', PaymentMethodController::class)->names('methods');
 });
 

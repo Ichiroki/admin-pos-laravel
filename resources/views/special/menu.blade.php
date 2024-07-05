@@ -16,12 +16,72 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
+        <a href="{{ route('dashboard') }}" class="text-gray-400 underline absolute text-sm cursor-default"><< Get back to dashboard</a>
         <div class="bg-gray-400 flex items-center justify-center h-screen">
-            <div class="border-gray-500 bg-gray-300 md:min-h-[37rem] w-full md:w-11/12 md:rounded-lg shadow-lg flex flex-col md:flex-row justify-between overflow-hidden relative min-h-screen">
-                <div class="p-5 w-full md:w-9/12">asdfsdaf</div>
+            <div class="border-gray-500 bg-gray-300 md:min-h-[37rem] w-full md:w-11/12 md:rounded-lg shadow-lg flex flex-col md:flex-row justify-between overflow-hidden relative min-h-screen" x-data="{ cart: [] }">
+                <div class="p-5 w-full md:w-9/12 overflow-auto">
+                    <div class="bg-gray-50 md:rounded-lg p-5">
+                        <h1 class="text-2xl font-semibold uppercase mb-3 block w-full border-b-2 border-gray-300 pb-3">Pilih Menu</h1>
+                        <div class="flex flex-col justify-between overflow-y-scroll">
+                            @foreach ($products as $product)
+                                @switch($product->category_id)
+                                    @case(1)
+                                    <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Makanan</h1>
+                                    <div class="flex flex-col items-center border border-gray-300 w-fit rounded-lg p-2">
+                                        <img src="{{asset('images/'. $product->image)}}" class="w-32">
+                                        <div class="mt-2">
+                                            <h1>{{ $product->name }}</h1>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="button" class="border-2 border-green-500 px-3 py-1 rounded-md hover:bg-green-500 group transition-all duration-150" id="cart-btn">
+                                                <i class="bi bi-plus group-hover:text-white transition-all duration-150 text-sm"></i>
+                                                <span class="group-hover:text-white transition-all duration-150 font-semibold text-sm">Tambah</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                        @break
+
+                                    @case(2)
+                                    <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Minuman</h1>
+                                    <div class="flex flex-col items-center border border-gray-300 w-fit rounded-lg p-2">
+                                        <img src="{{asset('images/'. $product->image)}}" class="w-32">
+                                        <div class="mt-2">
+                                            <h1>{{ $product->name }}</h1>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="button" class="border-2 border-green-500 px-3 py-1 rounded-md hover:bg-green-500 group transition-all duration-150" id="cart-btn">
+                                                <i class="bi bi-plus group-hover:text-white transition-all duration-150 text-sm"></i>
+                                                <span class="group-hover:text-white transition-all duration-150 font-semibold text-sm">Tambah</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @break
+
+                                    @case(3)
+                                    <h1 class="text-xl border-b-4 border-gray-300 w-fit mb-6">Desserts</h1>
+                                    <div class="flex flex-col items-center border border-gray-300 w-fit rounded-lg p-2">
+                                        <img src="{{asset('images/'. $product->image)}}" class="w-32">
+                                        <div class="mt-2">
+                                            <h1>{{ $product->name }}</h1>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="button" class="border-2 border-green-500 px-3 py-1 rounded-md hover:bg-green-500 group transition-all duration-150" id="cart-btn">
+                                                <i class="bi bi-plus group-hover:text-white transition-all duration-150 text-sm"></i>
+                                                <span class="group-hover:text-white transition-all duration-150 font-semibold text-sm">Tambah</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @break
+                                    @default
+
+                                @endswitch
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
                 <div class="p-5 w-full md:w-3/12 bg-gray-50 md:flex flex-col items-center justify-between hidden" id="cart">
                     <h1 class="border-b-2 border-gray-300 block w-full text-center text-2xl font-bold uppercase mb-3 pb-3">Cart</h1>
-                    <div>Test</div>
+                    <div id="cart" x-show="cart.length > 0"></div>
                     <div class="border-t-2 border-gray-300 font-bold uppercase mt-3 pt-3 w-full text-center">
                         <button type="button" class="border-2 border-green-500 px-3 py-2 rounded-md hover:bg-green-500 group transition-all duration-150">
                             <i class="bi bi-cart-check-fill group-hover:text-white transition-all duration-150"></i>
@@ -55,6 +115,12 @@
                 </div>
             </div>
         </div>
+        <script>
+            const menuAdd = document.getElementById('cart-btn')
+
+                menuAdd.addEventListener('click', function() {
+            })
+        </script>
     </body>
 </html>
 
